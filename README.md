@@ -1,5 +1,14 @@
 
-            <!DOCTYPE html>
+          <!DOCTYPE html>
+<html>
+  <head>
+	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>WebCat</title>
+  </head>
+  <body>	
+  </body>
+</html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 
 <head>
@@ -10,25 +19,24 @@
         body {
             font-family: Arial, sans-serif;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
             background-color: #f5f5f5;
-            padding: 10px; /* 为小屏幕设备添加内边距 */
+            padding: 10px; 
         }
-
        .calculator {
             background-color: #ffffff;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            width: 90%; /* 使计算器宽度适应屏幕宽度 */
-            max-width: 360px; /* 设置最大宽度，防止在大屏幕上过大 */
+            width: 90%; 
+            max-width: 360px; 
         }
-
        .display {
-            width: 100%; /* 让显示区域宽度自适应计算器宽度 */
+            width: 100%; 
             height: 60px;
             font-size: 2em;
             margin-bottom: 20px;
@@ -38,67 +46,68 @@
             text-align: right;
             background-color: #f0f0f0;
         }
-
        .buttons {
             display: grid;
-            grid-template-columns: repeat(4, 1fr); /* 保持4列布局 */
+            grid-template-columns: repeat(4, 1fr); 
             grid-gap: 10px;
         }
-
        .button {
             font-size: 1.5em;
             border: none;
             border-radius: 5px;
             background-color: #e0e0e0;
             color: #333333;
-            padding: 15px; /* 减小按钮内边距，适应小屏幕 */
+            padding: 15px; 
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
-
        .button:hover {
             background-color: #d0d0d0;
         }
-
        .operator {
             background-color: #007aff;
             color: #ffffff;
         }
-
        .operator:hover {
             background-color: #0062cc;
         }
-
        .equal {
             background-color: #00cc66;
             grid-column: span 2;
             color: #ffffff;
         }
-
        .equal:hover {
             background-color: #00a34d;
         }
-
        .clear {
             background-color: #ff4d4d;
             color: #ffffff;
             grid-row: 1;
             grid-column: 1;
         }
-
        .clear:hover {
             background-color: #e03e3e;
         }
-
        .delete {
             background-color: #ff9800;
             color: #ffffff;
             grid-row: 1;
             grid-column: 2;
         }
-
        .delete:hover {
             background-color: #e68a00;
+        }
+       .repo-link {
+            margin-top: 20px;
+            font-size: 0.8em;
+            color: #333;
+        }
+       .repo-link a {
+            color: #007aff;
+            text-decoration: none;
+        }
+       .repo-link a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -125,11 +134,13 @@
             <button class="button operator" onclick="appendValue('+')">+</button>
         </div>
     </div>
+    <div class="repo-link">
+        该计算器项目已开源，访问 <a href="https://github.com/jiayuxuan123/-" target="_blank">GitHub仓库</a> 查看更多。
+    </div>
     <script>
         function appendValue(value) {
             document.getElementById('display').value += value;
         }
-
         function calculate() {
             try {
                 let result = eval(document.getElementById('display').value);
@@ -138,16 +149,6 @@
                 document.getElementById('display').value = '错误';
             }
         }
-
         function deleteValue() {
             let currentValue = document.getElementById('display').value;
-            document.getElementById('display').value = currentValue.slice(0, -1);
-        }
-
-        function clearDisplay() {
-            document.getElementById('display').value = '';
-        }
-    </script>
-</body>
-
-</html>
+            document.getElementById('display').value = currentValue.slic

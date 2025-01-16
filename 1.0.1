@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>计算器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f5;
+        }
+
+     .calculator {
+            background-color: #333;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+     .display {
+            width: 100%;
+            height: 60px;
+            font-size: 30px;
+            border: none;
+            border-radius: 5px;
+            padding: 0 10px;
+            margin-bottom: 15px;
+            text-align: right;
+        }
+
+     .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 10px;
+        }
+
+     .button {
+            height: 60px;
+            font-size: 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #666;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+     .button:hover {
+            background-color: #888;
+        }
+
+     .operator {
+            background-color: #f08c00;
+        }
+
+     .operator:hover {
+            background-color: #ff9800;
+        }
+
+     .equal {
+            background-color: #28a745;
+        }
+
+     .equal:hover {
+            background-color: #218838;
+        }
+
+     .clear {
+            background-color: #dc3545;
+        }
+
+     .clear:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="calculator">
+        <input type="text" id="display" class="display" readonly>
+        <div class="buttons">
+            <button class="button" onclick="appendToDisplay('7')">7</button>
+            <button class="button" onclick="appendToDisplay('8')">8</button>
+            <button class="button" onclick="appendToDisplay('9')">9</button>
+            <button class="button operator" onclick="appendToDisplay('/')">/</button>
+            <button class="button" onclick="appendToDisplay('4')">4</button>
+            <button class="button" onclick="appendToDisplay('5')">5</button>
+            <button class="button" onclick="appendToDisplay('6')">6</button>
+            <button class="button operator" onclick="appendToDisplay('*')">*</button>
+            <button class="button" onclick="appendToDisplay('1')">1</button>
+            <button class="button" onclick="appendToDisplay('2')">2</button>
+            <button class="button" onclick="appendToDisplay('3')">3</button>
+            <button class="button operator" onclick="appendToDisplay('-')">-</button>
+            <button class="button" onclick="appendToDisplay('0')">0</button>
+            <button class="button" onclick="appendToDisplay('.')">.</button>
+            <button class="button equal" onclick="calculate()">=</button>
+            <button class="button operator" onclick="appendToDisplay('+')">+</button>
+            <button class="button" onclick="appendToDisplay('%')">%</button>
+            <button class="button" onclick="appendToDisplay('sqrt')">sqrt</button>
+            <button class="button clear" onclick="clearDisplay()">C</button>
+            <button class="button" onclick="backspace()">⌫</button>
+        </div>
+    </div>
+    <script>
+        function appendToDisplay(value) {
+            const display = document.getElementById('display');
+            const currentValue = display.value;
+            if ((isNaN(Number(value)) &&!isOperator(value)) || (isOperator(value) && (currentValue === '' || isOperator(currentValue[currentValue.length - 1])))) {
+                return;
+            }
+            display.value += value;
+        }
+
+        function isOperator(char) {
+            return ['+', '-', '*', '/', '%','sqrt'].includes(char);
+        }
+
+        function clearDisplay() {
+            const display = document.getElementById('display');
+            display.value = '';
+        }
+
+        function backspace() {
+            const display = document.getElementById('display');
+            display.value = display.value.slice(0, -1);
+        }
+
+        function calculate() {
+            const display = document.getElementById('display');
+            let expression = display.value;
+            if (expression === '') {
+                return;
+            }
+            try {
+                expression = expression.replace(/sqrt(\d+)/g, 'Math.sqrt($1)');
+                expression = expression.replace('%', '/100');
+                let result = eval(expression);
+                display.value = result;
+            } catch (error) {
+                display.value = 'Error';
+            }
+        }
+    </script>
+</body>
+
+</html>
